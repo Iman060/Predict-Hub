@@ -69,9 +69,9 @@ export default function DisputesManagement() {
   );
 
   const getStatusBadge = (status: string) => {
-    const variants: Record<string, "default" | "destructive" | "secondary"> = {
-      pending: "secondary",
-      approved: "default",
+    const variants: Record<string, "outline" | "default" | "destructive" | "success" | "warning"> = {
+      pending: "warning",
+      approved: "success",
       rejected: "destructive",
     };
     
@@ -83,7 +83,7 @@ export default function DisputesManagement() {
 
     return (
       <Badge 
-        variant={variants[status] || "secondary"}
+        variant={variants[status] || "outline"}
         className={colors[status] || "bg-gray-500/20 text-gray-400 border-gray-500/30"}
       >
         {status?.charAt(0).toUpperCase() + status?.slice(1) || "Unknown"}
