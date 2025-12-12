@@ -23,8 +23,18 @@ import ResolutionCenter from "@/components/admin/ResolutionCenter";
 import AuditLogsPanel from "@/components/admin/AuditLogsPanel";
 import PredictiveIntelligence from "@/components/admin/PredictiveIntelligence";
 
+interface MetricsData {
+  active_markets?: number;
+  total_liquidity?: number;
+  daily_volume?: number;
+  active_users_24h?: number;
+  active_users_7d?: number;
+  failed_transactions?: number;
+  [key: string]: any;
+}
+
 export default function SuperAdminDashboard() {
-  const [metrics, setMetrics] = useState(null);
+  const [metrics, setMetrics] = useState<MetricsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [apiHealth, setApiHealth] = useState({ status: "unknown", latency: 0 });
 
