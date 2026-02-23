@@ -31,10 +31,10 @@ export default function AdminLoginPage() {
     try {
       const response = await api.get(apiEndpoints.me);
       const userData = response.data;
-      
+
       if (userData.role === 'ADMIN' || userData.is_staff === true) {
         console.log('[AdminLogin] Token verified, user is admin, redirecting to dashboard');
-        const redirect = searchParams.get('redirect') || '/admin';
+        const redirect = searchParams?.get('redirect') || '/admin';
         router.push(redirect);
       } else {
         console.log('[AdminLogin] Token exists but user is not admin');
@@ -55,14 +55,14 @@ export default function AdminLoginPage() {
 
     try {
       console.log('[AdminLogin] Attempting login for:', username);
-      
+
       const response = await api.post(apiEndpoints.login, {
         username,
         password,
       });
 
       const { token, user } = response.data;
-      
+
       if (!token) {
         throw new Error('No token received from server');
       }
@@ -87,7 +87,7 @@ export default function AdminLoginPage() {
 
       if (userData.role === 'ADMIN' || userData.is_staff === true) {
         console.log('[AdminLogin] User verified as admin, redirecting to dashboard');
-        const redirect = searchParams.get('redirect') || '/admin';
+        const redirect = searchParams?.get('redirect') || '/admin';
         router.push(redirect);
       } else {
         console.error('[AdminLogin] User is not an admin');
@@ -102,7 +102,7 @@ export default function AdminLoginPage() {
         status: err.response?.status,
         data: err.response?.data
       });
-      
+
       setError(
         err.response?.data?.detail ||
         err.response?.data?.message ||
@@ -135,7 +135,7 @@ export default function AdminLoginPage() {
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
-            
+
             <div className="space-y-2">
               <Label htmlFor="username">Username</Label>
               <Input

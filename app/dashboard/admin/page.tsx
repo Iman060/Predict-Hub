@@ -2,4 +2,8 @@
 // Django Admin remains at /admin (handled by Django)
 // This dashboard is at /dashboard/admin
 
-export { default } from '../../admin/page';
+import { redirect } from 'next/navigation';
+
+export default function DashboardAdminPage() {
+    redirect('/admin');
+}

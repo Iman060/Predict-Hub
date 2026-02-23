@@ -6,6 +6,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Shield, LogOut, Activity, TrendingUp, Users, AlertTriangle, FileText, Gauge } from "lucide-react";
 import { useRequireAdmin } from "@/lib/hooks/useRBAC";
+import AdminHeader from "@/components/admin/AdminHeader";
+
 
 interface AdminLayoutProps {
   children: React.ReactNode;
