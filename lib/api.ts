@@ -147,7 +147,7 @@ axiosInstance.interceptors.response.use(
     }
 
     // Handle 5xx errors - NO RETRY (fail fast to prevent storms)
-    if (error.response?.status >= 500 && error.response?.status < 600) {
+    if (error.response?.status && error.response.status >= 500 && error.response.status < 600) {
       console.error('[API] Server error:', error.config?.url, error.response.status);
       return Promise.reject(error);
     }
@@ -231,11 +231,14 @@ export const apiEndpoints = {
   marketCategories: '/markets/categories/',
   marketTrades: (id: string | number) => `/markets/${id}/trades/`,
   marketPosition: (id: string | number) => `/markets/${id}/position/`,
+  marketHolders: (id: string | number) => `/markets/${id}/holders/`,
+  holders: (id: string | number) => `/markets/${id}/holders/`,
   marketPriceHistory: (id: string | number) => `/markets/${id}/price_history/`,
   marketResolve: (id: string | number) => `/markets/${id}/resolve/`, // Admin only
   
   // Trades
   trades: '/trades/',
+  trade: '/trades/',
   tradeById: (id: string | number) => `/trades/${id}/`,
   createTrade: '/trades/',
   

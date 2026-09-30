@@ -17,7 +17,7 @@ export default function UserManagementPanel() {
   const [actionLoading, setActionLoading] = useState<Record<string, boolean>>({});
   const [showBanModal, setShowBanModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState<any>(null);
-  const [banType, setBanType] = useState<"soft" | "hard" | "freeze">("soft");
+  const [banType, setBanType] = useState<"soft" | "hard">("soft");
 
   const { data: users, error, mutate } = useSWR(
     "/admin/users/?limit=100",

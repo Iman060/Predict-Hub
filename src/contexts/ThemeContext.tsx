@@ -1,10 +1,18 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
-const ThemeContext = createContext(undefined);
+type Theme = 'dark' | 'light';
 
-export const useTheme = () => {
+interface ThemeContextType {
+  theme: Theme;
+  toggleTheme: () => void;
+  mounted: boolean;
+}
+
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+export const useTheme = (): ThemeContextType => {
   const context = useContext(ThemeContext);
   if (context === undefined) {
     throw new Error('useTheme must be used within a ThemeProvider');
@@ -12,14 +20,14 @@ export const useTheme = () => {
   return context;
 };
 
-export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('dark'); // Default to dark theme
+export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+  const [theme, setTheme] = useState<Theme>('dark'); // Default to dark theme
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     // Check for saved theme preference or default to dark
     if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('theme') || 'dark';
+      const savedTheme = (localStorage.getItem('theme') as Theme) || 'dark';
       
       // Apply theme immediately to prevent flash
       if (savedTheme === 'dark') {
